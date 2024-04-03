@@ -1,6 +1,14 @@
 import random
 import math
-from numpy.random import randint
+# from numpy.random import randint
+ 
+alkyl_locations = {"methyl":1, "ethyl":2, "propyl":3, "isopropyl":3, "butyl":4, "tert-butyl":4, "sec-butyl":4, "isobutyl":4}
+prefixes = ["prop", "but", "pent", "hex", "hept", "oct"]
+
+def generate_alkene():
+    prefix = random.choice(prefixes)
+    
+
 
 def generate_cycloalkene():
     # Define lists of prefixes for different alkyl groups
