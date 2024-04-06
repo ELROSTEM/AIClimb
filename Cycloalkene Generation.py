@@ -2,82 +2,74 @@ import random
 import math
 from numpy.random import randint
 
-def generate_cycloalkene():
-    # Define lists of prefixes for different alkyl groups
-    alkyl_groups = ["methyl", "ethyl", "propyl", "isopropyl", "butyl", "t-butyl", "s-butyl", "isobutyl"]
-     
-    # Define list of cycloalkene prefixes
-    cycloalkene_prefixes = ["prop", "but", "pent", "hex", "hept", "oct"]
-    
-    # Randomly select an alkyl group to attach to the cycloalkene ring
-    alkyl_group = random.choice(alkyl_groups)
-    
-    # Randomly select a cycloalkene prefix
-    prefix = random.choice(cycloalkene_prefixes)
+# Useful for whole program:
 
-    # Determine length of ring
-    num_carbons = cycloalkene_prefixes.index(prefix) + 3
-    alkyl_location = randint(1, math.ceil(num_carbons/2 + 1))
-    if alkyl_location == 2:
-        while alkyl_location == 2:
-            alkyl_location = randint(1, math.ceil(num_carbons/2 + 1))
+alphabet = [*"abcdefghijklmnopqrstuvwxyz"]
+
+alkyl_groups = ["methyl", "ethyl", "propyl", "isopropyl", "butyl", "t-butyl", "s-butyl", "isobutyl"]
+
+exo_groups = ["methylene", "vinyl", "allyl"]
+
+alkene_prefixes = ["prop", "but", "pent", "hex", "hept", "oct"]
+
+class cycloalkene:
+
+    def __init__(self, prefix, group, length):
+
+        self.prefix = prefix
+        self.group = group
+        self.length = length
+
+    def iupac_name(self):
+
+        if type(self.group) is list:
+
+            if alphabet.index([*self.group[0]][0]) > alphabet.index([*self.group[1]][0]):
+
+                exo_location = randint(1, math.ceil(self.length/2 + 1))
+                alkyl_location = 1
+                
+                name = f"{alkyl_location}-{self.group[1]}-{exo_location}-{self.group[0]} cyclo{self.prefix}ane"
+
+            if alphabet.index([*self.group[1]][0]) > alphabet.index([*self.group[0]][0]):
+
+                exo_location = 1
+                alkyl_location = randint(1, math.ceil(self.length/2 + 1))
+                
+                name = f"{exo_location}-{self.group[0]}-{alkyl_location}-{self.group[1]} cyclo{self.prefix}ane"
+
+        if self.group in alkyl_groups:
+
+            alkyl_location = randint(1, math.ceil(self.length/2 + 1))
+            while alkyl_location == 2:
+                alkyl_location = randint(1, math.ceil(self.length/2 + 1))
         
-    
-    # Construct the IUPAC name
-    iupac_name = f"{alkyl_location}-{alkyl_group} cyclo{prefix}ene"
-    
-    return iupac_name
+            name = f"{alkyl_location}-{self.group} cyclo{self.prefix}ene"
 
-if __name__ == "__main__":
-    cycloalkene = generate_cycloalkene()
-    print("Random Cycloalkene with Correct IUPAC Nomenclature:", cycloalkene)
+        return name
 
+def cyclogen(endo_exo):
 
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+    prfx = random.choice(alkene_prefixes)
+    if endo_exo == "endo":
+        grp = random.choice(alkyl_groups)
+    if endo_exo == "exo":
+        grp = [random.choice(exo_groups), random.choice(alkyl_groups)]
+    leng = alkene_prefixes.index(prfx) + 3
 
-class CircularLinkedList:
-    def __init__(self):
-        self.head = None
+    return cycloalkene(prfx, grp, leng)
 
-    # Method to insert a new node at the end of the linked list
-    def insert(self, data):
-        new_node = Node(data)
-        if not self.head:
-            self.head = new_node
-            new_node.next = self.head
-        else:
-            temp = self.head
-            while temp.next != self.head:
-                temp = temp.next
-            temp.next = new_node
-            new_node.next = self.head
+# EXOCYCLIC CYCLOALKENE
+cyclo1 = cyclogen("exo")
+print(cyclo1.prefix)
+print(cyclo1.group)
+print(cyclo1.length)
+print("Random Cycloalkene with Correct IUPAC Nomenclature:", cyclo1.iupac_name())
 
-    # Method to display the circular linked list
-    def display(self):
-        if not self.head:
-            print("Circular Linked List is empty")
-            return
-        current = self.head
-        while True:
-            print(current.data, end=" ")
-            current = current.next
-            if current == self.head:
-                break
-        print()
-
-size = int(input("Size of ring "))
-
-if __name__ == "__main__":
-    cycloalkene = CircularLinkedList()
-
-    # Inserting elements into the circular linked list to represent cyclobutene
-    for n in range(size):
-        cycloalkene.insert("C"+str(n+1))  # Represents first carbon atom
-
-    # Displaying the circular linked list representing cyclobutene
-    print("Circular Linked List representing cycloalkene", end=" ")
-    cycloalkene.display()
+# ENDOCYCLIC CYCLOALKENE
+cyclo2 = cyclogen("endo")
+print(cyclo2.prefix)
+print(cyclo2.group)
+print(cyclo2.length)
+print("Random Cycloalkene with Correct IUPAC Nomenclature:", cyclo2.iupac_name())
 
