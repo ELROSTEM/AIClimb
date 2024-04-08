@@ -1,9 +1,38 @@
 import CycloalkeneGeneration as c
 
-while 2 == 2:
-    endo_exo = input("Endocyclic or Exocyclic? ")
-    molecule = c.cyclogen(endo_exo)
-    print(molecule.iupac_name())
+end_exo = input("Endocyclic or Exocyclic? ")[0:3].lower()
+
+conversion = { "allyl": "propyl", "methylene": "methyl", "vinyl": "ethyl" }
+
+def Halogenation(molecule):
+
+    if molecule.endex == "exo":
+
+        group = [conversion[x] if x in conversion.keys() else x for x in molecule.group]
+        print(group)
+        print(molecule.locale)
+
+    if c.alphabet.index(c.alkyl_groups_dict[group[1]]) > c.alphabet.index(c.alkyl_groups_dict[group[0]]):
+        return f"1-{group[0]}-{molecule.locale[0]}-{group[1]} cyclo{molecule.prefix}ane"
+    
+    if c.alphabet.index(c.alkyl_groups_dict[group[0]]) > c.alphabet.index(c.alkyl_groups_dict[group[1]]):
+        return f"1-{group[1]}-{molecule.locale[1]}-{group[0]} cyclo{molecule.prefix}ane"
+    
+    if c.alphabet.index(c.alkyl_groups_dict[group[0]]) == c.alphabet.index(c.alkyl_groups_dict[group[1]]):
+
+        if group[0] == group [1]:
+            return f"1,{molecule.locale[0]}-di{group[1]} cyclo{molecule.prefix}ane"
+
+        else: 
+            return f"1-{group[1]}-{molecule.locale[1]}-{group[0]} cyclo{molecule.prefix}ane"
+
+
+for i in range(50):
+    cycl = c.cyclogen(end_exo)
+    print(cycl.iupac_name())
+    print(Halogenation(cycl))
+    print("..\n..\n..")
+
 
 # EXO Hydrogenation Examples: 
 # 1-allyl-1-isopropyl cyclopropane -> 1-isopropyl-1-propyl cyclopropane
