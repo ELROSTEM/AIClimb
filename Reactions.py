@@ -6,25 +6,28 @@ conversion = { "allyl": "propyl", "methylene": "methyl", "vinyl": "ethyl" }
 
 def Halogenation(molecule):
 
-    if molecule.endex == "exo":
+    if type(molecule) is c.cycloalkene:
 
-        group = [conversion[x] if x in conversion.keys() else x for x in molecule.group]
-        print(group)
-        print(molecule.locale)
+        if molecule.endex == "exo":
 
-    if c.alphabet.index(c.alkyl_groups_dict[group[1]]) > c.alphabet.index(c.alkyl_groups_dict[group[0]]):
-        return f"1-{group[0]}-{molecule.locale[0]}-{group[1]} cyclo{molecule.prefix}ane"
-    
-    if c.alphabet.index(c.alkyl_groups_dict[group[0]]) > c.alphabet.index(c.alkyl_groups_dict[group[1]]):
-        return f"1-{group[1]}-{molecule.locale[1]}-{group[0]} cyclo{molecule.prefix}ane"
-    
-    if c.alphabet.index(c.alkyl_groups_dict[group[0]]) == c.alphabet.index(c.alkyl_groups_dict[group[1]]):
+            group = [conversion[x] if x in conversion.keys() else x for x in molecule.group]
+            print(group)
+            print(molecule.locale)
 
-        if group[0] == group [1]:
-            return f"1,{molecule.locale[0]}-di{group[1]} cyclo{molecule.prefix}ane"
+            if c.alphabet.index(c.alkyl_groups_dict[group[1]]) > c.alphabet.index(c.alkyl_groups_dict[group[0]]):
+                return f"1-{group[0]}-{molecule.locale[0]}-{group[1]} cyclo{molecule.prefix}ane"
+            
+            if c.alphabet.index(c.alkyl_groups_dict[group[0]]) > c.alphabet.index(c.alkyl_groups_dict[group[1]]):
+                return f"1-{group[1]}-{molecule.locale[0]}-{group[0]} cyclo{molecule.prefix}ane"
+            
+            if c.alphabet.index(c.alkyl_groups_dict[group[0]]) == c.alphabet.index(c.alkyl_groups_dict[group[1]]):
 
-        else: 
-            return f"1-{group[1]}-{molecule.locale[1]}-{group[0]} cyclo{molecule.prefix}ane"
+                if group[0] == group [1]:
+                    return f"1,{molecule.locale[0]}-di{group[1]} cyclo{molecule.prefix}ane"
+
+                else: 
+                    return f"1-{group[1]}-{molecule.locale[1]}-{group[0]} cyclo{molecule.prefix}ane"
+
 
 
 for i in range(50):

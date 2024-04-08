@@ -39,7 +39,7 @@ class cycloalkene:
 
         if self.endex == "end":
         
-            return f"{self.locale[0]}-{self.group} cyclo{self.prefix}ene"
+            return f"{self.locale[0]}-{self.group[0]} cyclo{self.prefix}ene"
 
 def cyclogen(end_exo):
 
@@ -48,18 +48,18 @@ def cyclogen(end_exo):
 
     if end_exo == "end":
         grp = [random.choice(alkyl_groups)]
-        alkyl_location = randint(1, math.ceil(leng/2 + 1))
+        alkyl_location = randint(1, math.ceil(float(leng)/2)+2)
         while alkyl_location == 2:
-            alkyl_location = randint(1, math.ceil(leng/2 + 1))
+            alkyl_location = randint(1, math.ceil(float(leng)/2)+2)
 
         locale = [alkyl_location]
 
     if end_exo == "exo":
         grp = [random.choice(exo_groups), random.choice(alkyl_groups)]
         if grp[0] == "methylene":
-            alkyl_location = randint(2, math.ceil(leng/2 + 1))
+            alkyl_location = randint(2, math.ceil(float(leng)/2)+2)
         else:
-            alkyl_location = randint(1, math.ceil(leng/2 + 1))
+            alkyl_location = randint(1, math.ceil(float(leng)/2)+2)
 
         if alphabet.index(alkyl_groups_dict[grp[1]]) > alphabet.index(exo_groups_dict[grp[0]]):
                 
@@ -75,9 +75,9 @@ def cyclogen(end_exo):
 
 if __name__ == "__main__":
 
-    for i in range(10):
-        cyclo1 = cyclogen("end")
-        print("#", cyclo1.iupac_name())
-    for i in range(10):
+    #for i in range(100):
+    #    cyclo1 = cyclogen("end")
+    #    print("#", cyclo1.iupac_name())
+    for i in range(100):
         cyclo1 = cyclogen("exo")
         print("#", cyclo1.iupac_name()) 
