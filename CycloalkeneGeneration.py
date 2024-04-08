@@ -18,7 +18,7 @@ alkene_prefixes = ["prop", "but", "pent", "hex", "hept", "oct"]
 
 class cycloalkene:
 
-    def __init__(self, prefix, group, length, endex, locale):
+    def __init__(self, prefix, group, length, endex, locale, nulocale):
 
         self.prefix = prefix
         #print(self.prefix)
@@ -30,6 +30,7 @@ class cycloalkene:
         #print(self.endex)
         self.locale = locale
         #print(self.locale)
+        self.nulocale = nulocale
 
     def iupac_name(self):
 
@@ -64,13 +65,15 @@ def cyclogen(end_exo):
         if alphabet.index(alkyl_groups_dict[grp[1]]) > alphabet.index(exo_groups_dict[grp[0]]):
                 
             locale = [1, alkyl_location]
+            nulocale = alkyl_location
 
         if alphabet.index(exo_groups_dict[grp[0]]) >= alphabet.index(alkyl_groups_dict[grp[1]]):
 
             grp = [grp[1], grp[0]]
             locale = [alkyl_location, 1]
+            nulocale = alkyl_location
 
-    return cycloalkene(prfx, grp, leng, end_exo, locale)
+    return cycloalkene(prfx, grp, leng, end_exo, locale, nulocale)
 
 
 if __name__ == "__main__":
@@ -78,6 +81,6 @@ if __name__ == "__main__":
     #for i in range(100):
     #    cyclo1 = cyclogen("end")
     #    print("#", cyclo1.iupac_name())
-    for i in range(100):
+    for i in range(10):
         cyclo1 = cyclogen("exo")
         print("#", cyclo1.iupac_name()) 
