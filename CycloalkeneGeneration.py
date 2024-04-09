@@ -54,6 +54,7 @@ def cyclogen(end_exo):
             alkyl_location = randint(1, math.ceil(float(leng)/2)+2)
 
         locale = [alkyl_location]
+        nulocale = [alkyl_location]
 
     if end_exo == "exo":
         grp = [random.choice(exo_groups), random.choice(alkyl_groups)]

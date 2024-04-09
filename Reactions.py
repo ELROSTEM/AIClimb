@@ -4,7 +4,7 @@ end_exo = input("Endocyclic or Exocyclic? ")[0:3].lower()
 
 conversion = { "allyl": "propyl", "methylene": "methyl", "vinyl": "ethyl" }
 
-def Halogenation(molecule):
+def Hydrogenation(molecule):
 
     if type(molecule) is c.cycloalkene:
 
@@ -25,13 +25,17 @@ def Halogenation(molecule):
 
                 else: 
                     return f"1-{group[0]}-{molecule.nulocale}-{group[1]} cyclo{molecule.prefix}ane"
+                
+        if molecule.endex == "end":
+
+            return f"1-{molecule.group[0]} cyclo{molecule.prefix}ane"
 
 
 
 for i in range(50):
     cycl = c.cyclogen(end_exo)
     print(cycl.iupac_name())
-    print(Halogenation(cycl))
+    print(Hydrogenation(cycl))
     print("..\n..\n..")
 
 
