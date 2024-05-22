@@ -1,5 +1,6 @@
 import random
 from numpy.random import randint
+import turtle
 
 #Definitions 
 
@@ -121,8 +122,24 @@ def alkenegen():
     iupac_name += f"{double_bond_loc}-{prefix}ene"
 
     #return
-    return iupac_name
+    return [iupac_name, subs, length]
+
+def draw(alkene):
+    turt = turtle.Turtle()
+    length = alkene[2]
+    subs = alkene[1]
+    for i in range(length):
+        if i == 0:
+            turt.left(30)
+        elif i % 2 == 0:
+            turt.left(60)
+        else:
+            turt.right(60)
+        turt.forward(30)
+    
+
 
 if __name__ == "__main__":
     myAlkene = alkenegen()
     print(myAlkene)
+    draw(myAlkene)

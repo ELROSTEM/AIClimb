@@ -1,9 +1,12 @@
-import indigo
+from indigo import *
+
+indigo = Indigo()
+renderer = IndigoRenderer(indigo)
 
 names = ["methane", "butene",
-         "3-ethyl-octane", "3,5-diethyl-octane",
-         "3-(2,4-dimethyl-pentyl)-octane", "cyclooctane",
-         "3-methyl-5-ethyl-cyclooctane", "cyclododeca-1,3,5,7,9,11-hexaene"]
+        "3-ethyl-octane", "3,5-diethyl-octane",
+        "3-(2,4-dimethyl-pentyl)-octane", "cyclooctane",
+        "3-methyl-5-ethyl-cyclooctane", "cyclododeca-1,3,5,7,9,11-hexaene"]
 
 array = indigo.createArray()
 for n in names:
